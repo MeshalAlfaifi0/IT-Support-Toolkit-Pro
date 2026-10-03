@@ -1,0 +1,3 @@
+# تبعيات بناء EXE؛ لا يحتاجها المستخدم لتشغيل النسخة الجاهزة
+-r requirements-lock.txt
+pyinstaller==6.21.0

@@ -1,0 +1,12 @@
+# تنسيق موحّد في المستودع، مع نهايات أسطر Windows لملفات التشغيل
+* text=auto
+*.py text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.yml text eol=lf
+*.spec text eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+*.png binary
+*.ico binary
