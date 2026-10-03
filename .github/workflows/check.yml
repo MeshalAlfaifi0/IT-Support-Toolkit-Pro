@@ -119,14 +119,5 @@ jobs:
           if ($assets[0].digest -and $assets[0].digest -ne "sha256:$hash") { throw 'Uploaded EXE checksum mismatch.' }
           gh release edit $tag --repo $env:GITHUB_REPOSITORY --draft=false --latest
           if ($LASTEXITCODE -ne 0) { throw 'Release publishing failed.' }
-          # إزالة مسودة المحاولة السابقة التي أنشأها هذا البناء فقط، بعد نجاح النشر.
-          $stale = @($releaseJson | ConvertFrom-Json | Where-Object { $_.id -eq 402702169 })
-          if ($stale.Count -eq 1 -and $stale[0].draft -and $stale[0].tag_name -eq 'windows-2' -and $stale[0].target_commitish -eq '816f938dcd795c564e6ff6b5ede365c8c97892a6') {
-            $staleAssets = @($stale[0].assets)
-            if ($staleAssets.Count -eq 1 -and $staleAssets[0].digest -eq 'sha256:3fa26622ecb737fcd9f5b148c97c2444c8d071a68d47639c18756f5bb37ca71d') {
-              gh api --method DELETE "repos/$($env:GITHUB_REPOSITORY)/releases/402702169"
-              if ($LASTEXITCODE -ne 0) { throw 'Could not remove the previous build draft.' }
-            }
-          }
           "Published EXE: $($release.html_url)" | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
           "SHA256: $hash" | Add-Content -LiteralPath $env:GITHUB_STEP_SUMMARY
