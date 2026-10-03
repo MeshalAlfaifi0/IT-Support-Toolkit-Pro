@@ -31,7 +31,11 @@ The main runtime dependencies are PySide6, psutil, pywin32, WMI, ReportLab, open
 
 If you already have a compiled executable, open it directly. Python is not required to run the bundled application.
 
-The current local build is:
+Download **IT-Operations-Console-Windows.exe** from the [latest Windows release](https://github.com/MeshalAlfaifi0/IT-Support-Toolkit-Pro/releases/latest). Open it directly; the executable bundles its runtime dependencies.
+
+Historical backups, personal databases, application logs and virtual environment folders are kept in private storage and are not distributed with the public project.
+
+The existing local build is:
 
 ```text
 dist/IT-Operations-Console-Organized-20261003.exe
@@ -113,7 +117,7 @@ Network configuration changes, domain actions, and printer queue mutations are t
 
 These checks construct all application pages, close the process, and restart it to verify saved language and theme settings in temporary storage. They use Qt's offscreen mode; inspect the visible interface separately when preparing a release.
 
-The GitHub Actions workflow runs the test configurations on Windows. A successful local check does not confirm that a cloud workflow has run.
+The GitHub Actions workflow runs both test configurations on Windows. Its optional release job builds the EXE, checks source and executable startup twice with saved preferences, and publishes only the verified executable. To request a release, run the workflow manually with `publish_exe` enabled, or include `[release-exe]` in a push commit message on `main`. Ordinary pushes and pull requests only run checks.
 
 ## Build an executable
 
